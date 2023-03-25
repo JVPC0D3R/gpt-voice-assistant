@@ -10,5 +10,5 @@ requests
 termcolor
 yaspin
 scipy
-gTTS
+gtts
 openai

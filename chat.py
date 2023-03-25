@@ -137,8 +137,8 @@ class GPTAssistant():
         self.toggleListening()
 
 
-
-assistant = GPTAssistant(
-        startListening=True, 
-        key='asdf',
-        voice=True)
+if __name__ == '__main__':
+    assistant = GPTAssistant(
+            startListening=True, 
+            key='asdf',
+            voice=True)

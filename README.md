@@ -14,16 +14,16 @@ To run the GPT Voice Assistant, you will need to provide an OpenAI API key. I su
 
 To install and run the GPT Voice Assistant, follow these steps:
 
-'git clone https://github.com/JVPRUGBIER/gpt-voice-assistant'
+```git clone https://github.com/JVPRUGBIER/gpt-voice-assistant```
 
 Install the required dependencies:
 
-'pip install -r requirements.txt'
+```pip install -r requirements.txt```
 
-Create a keys.py file in the project directory and add your OpenAI API key:
+Create a 'keys.py' file in the project directory and add your OpenAI API key:
 
-'API_KEY = "your_api_key"'
+```API_KEY = "your_api_key"```
 
 Run the assistant:
 
-'python chat.py'
+```python chat.py```

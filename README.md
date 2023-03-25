@@ -1,4 +1,4 @@
-# GPT-VOICE-ASSISTANT
+# 🤖GPT-VOICE-ASSISTANT🤖
 
 Welcome to GPT Voice Assistant, this software integrates features from carter-voice-assistant and replaces Carter API with OpenAI API. Currently, the chat.py script provides speech interaction, but I will soon be adding written interaction as well!
 

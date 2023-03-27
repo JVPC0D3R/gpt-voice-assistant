@@ -3,9 +3,36 @@ from termcolor import colored
 
 from keys import API_KEY
 
-print()
-print()
-print(colored("Welcome to GPT assistant", 'magenta'))
+print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
+
+print(colored("Welcome to GPT assistant\n\n", 'magenta'))
+print(colored("   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY   \n"+
+" YYYYYYYYYYYYYYYYYJJ?JJYYYYYYYYYYYYYYYYYYYYY \n"+
+" YYYYYYYYYYYY?~:.......^!?YYYYYYYYYYYYYYYYYY \n"+
+"YYYYYYYYYYYY?: .^7?JJJ?!:  :^::^~7?YYYYYYYYYY\n"+
+"YYYYYYYYYYY!  ~JYYYYY?!^. :^~~~^:. :!JYYYYYYY\n"+
+"YYYYYYY?~:.  !YYYJ!^. .^7JYYYYYYYJ7: :?YYYYYY\n"+
+"YYYYY7: .~^  ?YY! .:!?YYYJ!^:~7JYYYY^ .JYYYYY\n"+
+"YYYY~ .!YY7  ?YY~ 75YJ7~::~!~: .:!?YJ. !YYYYY\n"+
+"YYY!  ?YYY!  ?YY~ !!:::..~?YYYJ7^. .^  !YYYYY\n"+
+"YYY^ :YYYY!  JYY~ :!?JYJ?~:.^!?YYY?!:  !YYYYY\n"+
+"YYY!  ?YYY7  7JY~ ?YYYYYYY7 ^~::~7YYY7. ^YYYY\n"+
+"YYYY^ .7YYY?!::^: ?YYYYYYY7 !YY!  ?YYY?  7YYY\n"+
+"YYYYY~  .~7JYYJ7~::~7JYJ!^. !YY?  7YYYJ. ~YYY\n"+
+"YYYYY~ .~: .:!?YYYJ~. ::^7! !YY?  7YYY!  ?YYY\n"+
+"YYYYY~ .YYJ7^. .^~^:^!?YYY! !YY?  ?YJ~  !YYYY\n"+
+"YYYYY?. ^YYYYY?!^~?YYYJ7^. .7YY7  ^:  ^?YYYYY\n"+
+"YYYYYY?: .!JYYYYYYJ?~:  :~?JYYY^ .:^7JYYYYYYY\n"+
+"YYYYYYYY7:  .:^^^:. :~7JYYYYY?^ .?YYYYYYYYYYY\n"+
+"YYYYYYYYYYJ7!~~~~^. :!7???7~: .~JYYYYYYYYYYYY\n"+
+" YYYYYYYYYYYYYYYYYJ7^:.....:~7JYYYYYYYYYYYYYY\n"+
+" YYYYYYYYYYYYYYYYYYYYYYJJJYYYYYYYYYYYYYYYYYYY\n"+
+"   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n"+
+"                                         YYYY\n"+
+"     Developed by JVPRUGBIER              YYY\n"+
+"                                           YY\n"+
+"                                            Y\n"+
+"\n",'green'))
 
 with yaspin(text="Waking agent...") as spinner:
     import os

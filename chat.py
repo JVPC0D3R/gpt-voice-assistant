@@ -107,7 +107,7 @@ class GPTAssistant():
         response = completion['choices'][0]['message']['content']
 
 
-        print(colored(f'[🤖]{response}','green'))
+        print(colored(f'[🤖]:{response}','green'))
 
         self.play_audio(response=response)
 

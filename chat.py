@@ -1,6 +1,5 @@
 from yaspin import yaspin
 from termcolor import colored
-
 from keys import API_KEY
 
 print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
@@ -43,12 +42,16 @@ with yaspin(text="Waking agent...") as spinner:
     import scipy.io.wavfile as wav
     from queue import Queue
     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
+    os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from pygame import mixer
     #from modules.Whisper import transcribe
     from modules.Whisper import transcribe
     from modules.VoiceActivityDetection import VADDetector
     import openai
     from gtts import gTTS
+    from modules.Sumup import Sumarizer
+
+    sumarizer = Sumarizer(max_length_input=1024,max_length_output=128)
 
     openai.api_key = API_KEY
     mixer.init()

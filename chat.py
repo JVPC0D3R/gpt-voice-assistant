@@ -49,9 +49,9 @@ with yaspin(text="Waking agent...") as spinner:
     from modules.VoiceActivityDetection import VADDetector
     import openai
     from gtts import gTTS
-    from modules.Sumup import Sumarizer
+    from modules.Sumup import Summarizer
 
-    sumarizer = Sumarizer(max_length_input=1024,max_length_output=128)
+    sumarizer = Summarizer(max_length_input=1024,max_length_output=128)
 
     openai.api_key = API_KEY
     mixer.init()

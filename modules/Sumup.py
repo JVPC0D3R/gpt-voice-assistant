@@ -2,7 +2,7 @@ import torch
 from transformers import BartTokenizer, BartForConditionalGeneration
 
 
-class Sumarizer:
+class Summarizer:
 
     def __init__(self, max_length_input, max_length_output ):
 
@@ -27,7 +27,7 @@ class Sumarizer:
 
 if __name__ == '__main__':
 
-    mySumarizer = Sumarizer(max_length_input=1024,max_length_output=128)
+    mySumarizer = Summarizer(max_length_input=1024,max_length_output=128)
 
     input = "YOLOv5 is a state-of-the-art object detection algorithm developed by Ultralytics, which stands for 'You Only Look Once version 5'. The YOLOv5 architecture is built on top of the principles of previous YOLO versions, but introduces several key improvements, including a more efficient backbone network, a novel anchor-based mechanism for object detection, and the integration of new data augmentation techniques. YOLOv5 is capable of detecting and classifying objects in real-time with high accuracy and performance, making it an ideal algorithm for a wide range of applications, such as self-driving cars, surveillance systems, and robotics."
 

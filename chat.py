@@ -51,21 +51,22 @@ with yaspin(text="Waking agent...") as spinner:
     from gtts import gTTS
     from modules.Sumup import Summarizer
 
-    sumarizer = Summarizer(max_length_input=1024,max_length_output=128)
+    #summarizer = Summarizer(max_length_input=1024,max_length_output=128)
 
     openai.api_key = API_KEY
     mixer.init()
 
 class GPTAssistant():
 
-    def __init__(self, key='asdf', startListening=False, voice=False, local=False):
+    def __init__(self, startListening=False, voice=False, local=False):
 
-        self.key = key
+        
         self.voice = voice
         self.listening = startListening
         self.vad = VADDetector(self.onSpeechStart, self.onSpeechEnd)
         self.vad_data = Queue()
-        self.local = local
+        self.context = [{"role": "system", "content": self.read_system_context("jvp.txt")}]
+        
         
 
     
@@ -109,35 +110,46 @@ class GPTAssistant():
                 text = transcribe(data)
                 
                 if len(text) > 4 and text != "Thank you.":
+
                     print(colored(f'[👨]:{text}', 'magenta'))
-                    #print('enviando')
-                    self.send_to_GPT(prompt = text)
-                    #self.send_to_davinci(prompt = text)
+
+                    self.build_context(role ='user', content = text)
+                    
+                    self.send_to_GPT(messages = self.context)
+                    
             
-    def send_to_davinci(self, prompt="Hi!", engine = "text-davinci-003"):
+    def read_system_context(self, file):
 
-        completion = openai.Completion.create(engine=engine,prompt=prompt,max_tokens=2048) 
+        context = ''
 
-        response = completion.choices[0].text
+        with open(file) as f:
 
-        print(f'<<<{response}')
+            lines = f.readlines()
 
-        self.play_audio(response=response)
+            for line in lines:
 
-    def send_to_GPT(self, prompt="Hi!", engine = "text-davinci-003"):
+                context += line
+
+        return context
+
+                
+    def build_context(self, role, content):
+
+        self.context.append({"role": role, "content": content})
+
+
+    def send_to_GPT(self, messages):
 
         completion = openai.ChatCompletion.create(
             model = 'gpt-3.5-turbo',
-            messages = [
-            {'role': 'user', 'content': f'{prompt}'}
-            ],
-            temperature = 0  
-            )
+            messages = messages)
 
         response = completion['choices'][0]['message']['content']
 
 
         print(colored(f'[🤖]:{response}','green'))
+
+        self.build_context(role = 'assistant', content = response)
 
         self.play_audio(response=response)
 
@@ -170,5 +182,4 @@ class GPTAssistant():
 if __name__ == '__main__':
     assistant = GPTAssistant(
             startListening=True, 
-            key='asdf',
             voice=True)

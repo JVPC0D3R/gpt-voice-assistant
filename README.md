@@ -1,6 +1,12 @@
-# 🤖GPT-VOICE-ASSISTANT🤖
+# GPT-VOICE-ASSISTANT
 
-Welcome to GPT Voice Assistant, this software integrates features from carter-voice-assistant and replaces Carter API with OpenAI API. Currently, the chat.py script provides speech interaction, but I will soon be adding written interaction as well!
+<p align="center">
+  <img src="https://github.com/JVPRUGBIER/resources/blob/main/JVP_gpt_voice_chat_gif.gif" width="800" height="400" />
+</p>
+
+
+
+Welcome to GPT Voice Assistant, this software integrates features from <a href="https://github.com/huwprosser/carter-voice-assistant">carter-voice-assistant</a> and replaces Carter API with <a href="https://openai.com/blog/openai-api">OpenAI API</a>. Currently, the chat.py script provides speech interaction, but I will soon be adding written interaction as well!
 
 ## How it Works
 

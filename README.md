@@ -1,7 +1,7 @@
 # GPT-VOICE-ASSISTANT
 
 <p align="center">
-  <img src="https://github.com/JVPRUGBIER/resources/blob/main/JVP_gpt_voice_chat_gif.gif" width="800" height="400" />
+  <img src="https://github.com/JVPRUGBIER/resources/blob/main/JVP_gpt_voice_chat_gif.gif" width="100%" />
 </p>
 
 

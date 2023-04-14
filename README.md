@@ -6,7 +6,7 @@
 
 
 
-Welcome to GPT Voice Assistant, this software integrates features from <a href="https://github.com/huwprosser/carter-voice-assistant">carter-voice-assistant</a> and replaces Carter API with <a href="https://openai.com/blog/openai-api">OpenAI API</a>. Currently, the chat.py script provides speech interaction, but I will soon be adding written interaction as well!
+Welcome to GPT Voice Assistant, this software integrates features from <a href="https://github.com/huwprosser/carter-voice-assistant">carter-voice-assistant</a> and replaces Carter API with <a href="https://openai.com/blog/openai-api">OpenAI API</a>. Currently, the chat.py script provides speech and text interaction.
 
 ## How it Works
 
@@ -30,6 +30,16 @@ Create a 'keys.py' file in the project directory and add your OpenAI API key:
 
 ```API_KEY = "your_api_key"```
 
-Run the assistant:
+## Run the assistant:
 
-```python chat.py```
+Chat using text with GPT
+
+```python chat.py -t```
+
+Chat using text with GPT and let the assistant read the response out loud
+
+```python chat.py -t -v```
+
+Have a full speech chat with the GPT voice assistant
+
+```python chat.py -l -v```

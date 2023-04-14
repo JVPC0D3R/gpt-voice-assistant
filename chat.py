@@ -44,12 +44,19 @@ with yaspin(text="Waking agent...") as spinner:
     os.environ['PYGAME_HIDE_SUPPORT_PROMPT'] = "hide"
     os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
     from pygame import mixer
-    #from modules.Whisper import transcribe
+    
     from modules.Whisper import transcribe
     from modules.VoiceActivityDetection import VADDetector
     import openai
     from gtts import gTTS
     from modules.Sumup import Summarizer
+
+    import argparse
+    parser = argparse.ArgumentParser()
+
+    parser.add_argument("-v", "--voice", action="store_true", help = "Make GPT talk")
+    parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
+    parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
     #summarizer = Summarizer(max_length_input=1024,max_length_output=128)
 
@@ -58,11 +65,12 @@ with yaspin(text="Waking agent...") as spinner:
 
 class GPTAssistant():
 
-    def __init__(self, startListening=False, voice=False, local=False):
+    def __init__(self, startListening=False, startTexting = False, voice=False, local=False):
 
         
         self.voice = voice
         self.listening = startListening
+        self.texting = startTexting
         self.vad = VADDetector(self.onSpeechStart, self.onSpeechEnd)
         self.vad_data = Queue()
         self.context = [{"role": "system", "content": self.read_system_context("jvp.txt")}]
@@ -70,11 +78,26 @@ class GPTAssistant():
         
 
     
-        if startListening:
+        if startListening and not startTexting:
             self.startListening()
 
             t = threading.Thread(target=self.transcription_loop)
             t.start()
+        
+        else:
+            
+            self.writingMessage()
+
+    def writingMessage(self):
+
+        text = ''
+
+        while text != 'Exit':
+
+            text = input(colored("[👨]: ", "magenta"))
+
+            self.build_context(role ='user', content = text)
+            self.send_to_GPT(messages = self.context)
 
     def startListening(self):
         print(colored("Listening 👂", 'green'))
@@ -150,8 +173,8 @@ class GPTAssistant():
         print(colored(f'[🤖]:{response}','green'))
 
         self.build_context(role = 'assistant', content = response)
-
-        self.play_audio(response=response)
+        if (parser.parse_args().voice):
+            self.play_audio(response=response)
 
 
 
@@ -181,5 +204,6 @@ class GPTAssistant():
 
 if __name__ == '__main__':
     assistant = GPTAssistant(
-            startListening=True, 
+            startListening = parser.parse_args().listen,
+            startTexting =  parser.parse_args().text,
             voice=True)

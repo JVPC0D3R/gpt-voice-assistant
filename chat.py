@@ -199,7 +199,8 @@ class GPTAssistant():
         
         time.sleep(1)
         # re-activate microphone
-        self.toggleListening()
+        if (parser.parse_args().listen):
+            self.toggleListening()
 
 
 if __name__ == '__main__':

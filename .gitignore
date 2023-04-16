@@ -9,3 +9,6 @@ keys.py
 
 # audio
 *.mp3
+
+# weights
+*.pt

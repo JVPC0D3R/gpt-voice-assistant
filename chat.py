@@ -49,7 +49,9 @@ with yaspin(text="Waking agent...") as spinner:
     from modules.VoiceActivityDetection import VADDetector
     import openai
     from gtts import gTTS
-    from modules.Sumup import Summarizer
+    #from modules.Sumup import Summarizer
+
+    from modules.Yolo import see
 
     import argparse
     parser = argparse.ArgumentParser()
@@ -96,7 +98,10 @@ class GPTAssistant():
 
             text = input(colored("[👨]: ", "magenta"))
 
+            self.get_command(text)
+
             self.build_context(role ='user', content = text)
+            
             self.send_to_GPT(messages = self.context)
 
     def startListening(self):
@@ -136,6 +141,8 @@ class GPTAssistant():
 
                     print(colored(f'[👨]:{text}', 'magenta'))
 
+                    self.get_command(text)
+
                     self.build_context(role ='user', content = text)
                     
                     self.send_to_GPT(messages = self.context)
@@ -166,9 +173,8 @@ class GPTAssistant():
         completion = openai.ChatCompletion.create(
             model = 'gpt-3.5-turbo',
             messages = messages)
-
+    
         response = completion['choices'][0]['message']['content']
-
 
         print(colored(f'[🤖]:{response}','green'))
 
@@ -201,6 +207,16 @@ class GPTAssistant():
         # re-activate microphone
         if (parser.parse_args().listen):
             self.toggleListening()
+
+    def get_command(self, text):
+
+        if text.find("What can you see?") != -1:
+
+            vision = see()
+
+            self.build_context(role ='system', content = f'The vision module detected {vision}')
+        
+
 
 
 if __name__ == '__main__':

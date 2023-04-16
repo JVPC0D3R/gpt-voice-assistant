@@ -12,3 +12,4 @@ yaspin
 scipy
 gtts
 openai
+ultralytics

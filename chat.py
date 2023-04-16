@@ -173,7 +173,7 @@ class GPTAssistant():
         print(colored(f'[🤖]:{response}','green'))
 
         self.build_context(role = 'assistant', content = response)
-        if (parser.parse_args().voice):
+        if (self.voice):
             self.play_audio(response=response)
 
 
@@ -207,4 +207,4 @@ if __name__ == '__main__':
     assistant = GPTAssistant(
             startListening = parser.parse_args().listen,
             startTexting =  parser.parse_args().text,
-            voice=True)
+            voice=parser.parse_args().voice)

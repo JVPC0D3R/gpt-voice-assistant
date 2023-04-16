@@ -12,6 +12,8 @@ Welcome to GPT Voice Assistant, this software integrates features from <a href="
 
 This software builds on top of the carter-voice-assistant project and replaces the Carter API with OpenAI API (GPT models). With this integration, our assistant is able to provide more accurate and sophisticated responses to user input.
 
+This project also gives the assistant "vision" capabilities using a <a href="https://github.com/ultralytics/ultralytics">YOLOv8</a> simple function.
+
 ## Getting Started
 
 To run the GPT Voice Assistant, you will need to provide an OpenAI API key. I suggest creating a python file named keys.py to store the API key variable.

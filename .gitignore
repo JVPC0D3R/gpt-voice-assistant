@@ -12,3 +12,4 @@ keys.py
 
 # weights
 *.pt
+/models/cd_CKPT/

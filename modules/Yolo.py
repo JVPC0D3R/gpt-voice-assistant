@@ -10,7 +10,7 @@ def see():
 
     img_pil = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
 
-    model = YOLO("yolov8n.pt")
+    model = YOLO("./models/yolov8n.pt")
     result = model(source = img_pil)
 
     print('\033[0m')

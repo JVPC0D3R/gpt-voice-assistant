@@ -49,7 +49,7 @@ with yaspin(text="Waking agent...") as spinner:
     from modules.VoiceActivityDetection import VADDetector
     import openai
     from gtts import gTTS
-    #from modules.Sumup import Summarizer
+    from modules.command import CommandDetector
 
     from modules.Yolo import see
 
@@ -60,7 +60,7 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
-    #summarizer = Summarizer(max_length_input=1024,max_length_output=128)
+    cdet = CommandDetector(model_path = "./models/cd_CKPT")
 
     openai.api_key = API_KEY
     mixer.init()
@@ -98,11 +98,24 @@ class GPTAssistant():
 
             text = input(colored("[👨]: ", "magenta"))
 
-            self.get_command(text)
+            if text != 'Exit':
 
-            self.build_context(role ='user', content = text)
+                self.build_context(role ='user', content = text)
+
+                self.get_command(text)
+
+                self.send_to_GPT(messages = self.context)
+
+                #print(self.context)
+
+            else:
+
+                print(colored(f'[🤖]: Goodbye!','green'))
+
+
+
+
             
-            self.send_to_GPT(messages = self.context)
 
     def startListening(self):
         print(colored("Listening 👂", 'green'))
@@ -210,11 +223,11 @@ class GPTAssistant():
 
     def get_command(self, text):
 
-        if text.find("What can you see?") != -1:
+        if cdet.command_filter(text) == "vision":
 
             vision = see()
 
-            self.build_context(role ='system', content = f'The vision module detected {vision}')
+            self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
         
 
 

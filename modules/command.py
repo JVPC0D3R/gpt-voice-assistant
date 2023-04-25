@@ -13,7 +13,7 @@ class CommandDetector():
         # Classify the input prompt
         result = self.classifier(prompt)
         command_id = int(result[0]['label'].split('_')[-1])
-        command = {0: 'vision', 1: 'chat'}[command_id]
+        command = {0: 'vision', 1: 'chat', 2: 'goodbye'}[command_id]
 
         return command
     

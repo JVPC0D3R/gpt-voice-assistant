@@ -13,3 +13,4 @@ keys.py
 # weights
 *.pt
 /models/cd_CKPT/
+/models/cd_CKPT_II/

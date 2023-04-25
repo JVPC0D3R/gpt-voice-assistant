@@ -60,7 +60,7 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
-    cdet = CommandDetector(model_path = "./models/cd_CKPT")
+    cdet = CommandDetector(model_path = "./models/cd_CKPT_II")
 
     openai.api_key = API_KEY
     mixer.init()
@@ -94,23 +94,30 @@ class GPTAssistant():
 
         text = ''
 
-        while text != 'Exit':
+        while True:
 
             text = input(colored("[👨]: ", "magenta"))
 
-            if text != 'Exit':
+            self.build_context(role ='user', content = text)
 
-                self.build_context(role ='user', content = text)
+            command = cdet.command_filter(text)
 
-                self.get_command(text)
+            if (command is not 'goodbye'):
+                    
 
-                self.send_to_GPT(messages = self.context)
+                    if cdet.command_filter(text) == "vision":
 
-                #print(self.context)
+                        vision = see()
+
+                        self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
+        
+
+                    self.send_to_GPT(messages = self.context)
 
             else:
+                self.send_to_GPT(messages = self.context)
 
-                print(colored(f'[🤖]: Goodbye!','green'))
+                break
 
 
 
@@ -220,16 +227,6 @@ class GPTAssistant():
         # re-activate microphone
         if (parser.parse_args().listen):
             self.toggleListening()
-
-    def get_command(self, text):
-
-        if cdet.command_filter(text) == "vision":
-
-            vision = see()
-
-            self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
-        
-
 
 
 if __name__ == '__main__':

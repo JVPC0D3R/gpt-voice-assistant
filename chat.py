@@ -60,7 +60,7 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
-    cdet = CommandDetector(model_path = "./models/cd_CKPT_II")
+    cdet = CommandDetector(model_path = "./models/cd_CKPT_III")
 
     openai.api_key = API_KEY
     mixer.init()
@@ -105,7 +105,7 @@ class GPTAssistant():
             if (command is not 'goodbye'):
                     
 
-                    if cdet.command_filter(text) == "vision":
+                    if command == "vision":
 
                         vision = see()
 
@@ -161,11 +161,29 @@ class GPTAssistant():
 
                     print(colored(f'[👨]:{text}', 'magenta'))
 
-                    self.get_command(text)
-
                     self.build_context(role ='user', content = text)
+
+                    command = cdet.command_filter(text)
+
+                    print(command)
+
+                    if (command is not 'goodbye'):
                     
-                    self.send_to_GPT(messages = self.context)
+
+                        if command == "vision":
+
+                            vision = see()
+
+                            self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
+        
+
+                        self.send_to_GPT(messages = self.context)
+
+                    else:
+
+                        self.send_to_GPT(messages = self.context, exit = True)
+
+                        break
                     
             
     def read_system_context(self, file):
@@ -188,7 +206,7 @@ class GPTAssistant():
         self.context.append({"role": role, "content": content})
 
 
-    def send_to_GPT(self, messages):
+    def send_to_GPT(self, messages, exit = False):
 
         completion = openai.ChatCompletion.create(
             model = 'gpt-3.5-turbo',
@@ -200,12 +218,12 @@ class GPTAssistant():
 
         self.build_context(role = 'assistant', content = response)
         if (self.voice):
-            self.play_audio(response=response)
+            self.play_audio(response=response, exit = exit)
 
 
 
 
-    def play_audio(self, response, language= "en"):
+    def play_audio(self, response, language= "en", exit = False):
 
         speech = gTTS(text = response, lang = language, slow = False)
 
@@ -225,7 +243,7 @@ class GPTAssistant():
         
         time.sleep(1)
         # re-activate microphone
-        if (parser.parse_args().listen):
+        if (parser.parse_args().listen and not exit):
             self.toggleListening()
 
 

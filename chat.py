@@ -1,6 +1,6 @@
 from yaspin import yaspin
 from termcolor import colored
-from keys import API_KEY
+from keys import OPENAI_API_KEY
 
 print('\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n')
 
@@ -52,6 +52,7 @@ with yaspin(text="Waking agent...") as spinner:
     from modules.command import CommandDetector
 
     from modules.Yolo import see
+    from modules.google import google_search
 
     import argparse
     parser = argparse.ArgumentParser()
@@ -60,9 +61,9 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
-    cdet = CommandDetector(model_path = "./models/cd_CKPT_III")
+    cdet = CommandDetector(model_path = "./models/cd_CKPT_IV")
 
-    openai.api_key = API_KEY
+    openai.api_key = OPENAI_API_KEY
     mixer.init()
 
 class GPTAssistant():
@@ -110,6 +111,12 @@ class GPTAssistant():
                         vision = see()
 
                         self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
+
+                    if command == "google":
+                        
+                        search = google_search(text)
+
+                        self.build_context(role ='system', content = f'The google module found {search}. Respond to the last user promt using this information.')
         
 
                     self.send_to_GPT(messages = self.context)
@@ -175,6 +182,12 @@ class GPTAssistant():
                             vision = see()
 
                             self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
+
+                        if command == "google":
+                        
+                            search = google_search(text)
+
+                            self.build_context(role ='system', content = f'The google module found {search}. Respond to the last user promt using this information.')
         
 
                         self.send_to_GPT(messages = self.context)

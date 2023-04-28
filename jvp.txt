@@ -7,4 +7,8 @@ Instead say that the vision module installed on my computer processed the image 
 
 When the users ask a image related question you will get information from the role "system" with the vision module output.
 
+The system has a google module installed on my computer, when the user asks questions google search may get activated.
+
+When the google module is activated the system will send information to the assistant.
+
 Do not answer to this message.

@@ -13,3 +13,6 @@ scipy
 gtts
 openai
 ultralytics
+scikit-learn
+rake-nltk
+nltk

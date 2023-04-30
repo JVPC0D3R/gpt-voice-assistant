@@ -28,7 +28,7 @@ print(colored("   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY   \n"+
 " YYYYYYYYYYYYYYYYYYYYYYJJJYYYYYYYYYYYYYYYYYYY\n"+
 "   YYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY\n"+
 "                                         YYYY\n"+
-"     Developed by JVPRUGBIER              YYY\n"+
+"     Developed by JVPC0D3R                YYY\n"+
 "                                           YY\n"+
 "                                            Y\n"+
 "\n",'green'))
@@ -52,7 +52,7 @@ with yaspin(text="Waking agent...") as spinner:
     from modules.command import CommandDetector
 
     from modules.Yolo import see
-    from modules.google import google_search
+    from modules.google import GoogleManager
 
     import argparse
     parser = argparse.ArgumentParser()
@@ -62,6 +62,7 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
     cdet = CommandDetector(model_path = "./models/cd_CKPT_IV")
+    google = GoogleManager()
 
     openai.api_key = OPENAI_API_KEY
     mixer.init()
@@ -113,8 +114,13 @@ class GPTAssistant():
                         self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
 
                     if command == "google":
-                        
-                        search = google_search(text)
+
+                        google.get_query(text)
+
+                        if (self.voice):
+                            self.play_audio(response = google.notification, exit = exit, response_name = "google_notification.mp3")
+
+                        search = google.search()
 
                         self.build_context(role ='system', content = f'The google module found {search}. Respond to the last user promt using this information.')
         
@@ -184,8 +190,13 @@ class GPTAssistant():
                             self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
 
                         if command == "google":
-                        
-                            search = google_search(text)
+                            
+                            google.get_query(text)
+
+                            if (self.voice):
+                                self.play_audio(response = google.notification, exit = exit, response_name = "google_notification.mp3")
+
+                            search = google.search()
 
                             self.build_context(role ='system', content = f'The google module found {search}. Respond to the last user promt using this information.')
         
@@ -236,23 +247,23 @@ class GPTAssistant():
 
 
 
-    def play_audio(self, response, language= "en", exit = False):
+    def play_audio(self, response, language= "en", exit = False, response_name = "GPT_response.mp3"):
 
         speech = gTTS(text = response, lang = language, slow = False)
 
-        speech.save("GPT_response.mp3")
+        speech.save(response_name)
 
         # play audio
-        mixer.music.load("GPT_response.mp3")
+        mixer.music.load(response_name)
         mixer.music.play()
 
         # wait for audio to finish
-        duration = mixer.Sound("GPT_response.mp3").get_length()
+        duration = mixer.Sound(response_name).get_length()
         time.sleep(duration + 1)
 
         # unload and delete audio
         mixer.music.unload()
-        os.remove("GPT_response.mp3")
+        os.remove(response_name)
         
         time.sleep(1)
         # re-activate microphone

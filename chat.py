@@ -51,7 +51,7 @@ with yaspin(text="Waking agent...") as spinner:
     from gtts import gTTS
     from modules.command import CommandDetector
 
-    from modules.Yolo import see
+    from modules.Yolo import Eyes
     from modules.google import GoogleManager
 
     import argparse
@@ -63,6 +63,7 @@ with yaspin(text="Waking agent...") as spinner:
 
     cdet = CommandDetector(model_path = "./models/cd_CKPT_IV")
     google = GoogleManager()
+    eyes = Eyes()
 
     openai.api_key = OPENAI_API_KEY
     mixer.init()
@@ -109,7 +110,7 @@ class GPTAssistant():
 
                     if command == "vision":
 
-                        vision = see()
+                        vision = eyes.see()
 
                         self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
 
@@ -185,7 +186,7 @@ class GPTAssistant():
 
                         if command == "vision":
 
-                            vision = see()
+                            vision = eyes.see()
 
                             self.build_context(role ='system', content = f'The vision module detected {vision}. Respond to the last user promt using this information.')
 
@@ -265,7 +266,6 @@ class GPTAssistant():
         mixer.music.unload()
         os.remove(response_name)
         
-        time.sleep(1)
         # re-activate microphone
         if (parser.parse_args().listen and not exit):
             self.toggleListening()

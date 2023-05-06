@@ -16,3 +16,4 @@ ultralytics
 scikit-learn
 rake-nltk
 nltk
+supervision

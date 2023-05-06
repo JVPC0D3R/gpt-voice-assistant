@@ -179,7 +179,6 @@ class GPTAssistant():
 
                     command = cdet.command_filter(text)
 
-                    print(command)
 
                     if (command is not 'goodbye'):
                     

@@ -24,18 +24,18 @@ GPT-3.5 is the core of the assistant, but this project uses other AI models to e
 
 * In order for the assistant to know if the user wants to perform one action or another, I implemented a 📑 <a href="https://huggingface.co/bert-base-uncased">text classification model</a>, which has to decide if the user input is a chat, a vision query, a google search or a farewell.
   
-* Also if the user command needs a google search before calling GPT, the assistant has to get arguments to call the SerpAPI. In order to do that I used another 🔑 <a href="https://pypi.org/project/rake-nltk/"> keyword extraction model</a>.
+* Also if the user command needs a google search before calling GPT, the assistant has to get arguments to call the SerpAPI. In order to do that I used a 🔑 <a href="https://pypi.org/project/rake-nltk/"> keyword extraction model</a>.
 </p>
 
 ## 🛹 getting started
 
 <p align="justify">
-To run the gpt Voice Assistant, you will need to provide an OpenAI API and a SerpAPI key. I suggest creating a python file named keys.py to store the API key variable.
+To run the gpt-voice-assistant, you will need to provide an OpenAI API and a SerpAPI key. I suggest creating a python file named keys.py to store the API key variables.
 </p>
 
 ### 📦 installation
 
-To install and run the GPT Voice Assistant, follow these steps:
+To install and run the gpt-voice-assistant, follow these steps:
 
 ```
 git clone https://github.com/JVPRUGBIER/gpt-voice-assistant
@@ -47,7 +47,7 @@ Install the required dependencies:
 pip install -r requirements.txt
 ```
 
-Create a 'keys.py' file in the project directory and add your OpenAI API key:
+Create a 'keys.py' file in the project directory and add your OpenAI and SerpAPI keys:
 
 ```
 OPENAI_API_KEY = "your_api_key"

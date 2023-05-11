@@ -1,5 +1,7 @@
 # Welcome to gpt-voice-assistant
 
+![Last Commit](https://img.shields.io/github/last-commit/JVPC0D3R/gpt-voice-assistant)
+
 <p align="justify">
 This software builds on top of <a href="https://github.com/huwprosser/carter-voice-assistant">carter-voice-assistant</a>  project and replaces the Carter API with 👾 <a href="https://openai.com/blog/openai-api">OpenAI API</a>. With this integration, the assistant is able to provide more accurate and sophisticated responses to user input.
 </p>

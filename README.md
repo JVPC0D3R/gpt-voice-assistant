@@ -51,7 +51,8 @@ pip install -r requirements.txt
 
 Create a 'keys.py' file in the project directory and add your OpenAI and SerpAPI keys:
 
-```
+```python 
+
 OPENAI_API_KEY = "your_api_key"
 SERP_API_KEY = "your_api_key"
 ```
@@ -70,7 +71,7 @@ Chat using text with GPT and let the assistant read the response out loud
 python chat.py -t -v
 ```
 
-Have a full speech chat with the GPT voice assistant
+Have a full speech chat with the gpt-voice-assistant
 
 ```
 python chat.py -l -v

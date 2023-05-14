@@ -26,7 +26,7 @@ class KeywordDetector():
 if __name__ == "__main__":
 
     KD = KeywordDetector()
-
-    input_text = "How many calories does an average pizza have?."
-    keywords = KD.extract_keywords(input_text)
-    print(keywords)
+    while True:
+        input_text = input()
+        keywords = KD.extract_keywords(input_text)
+        print(keywords)

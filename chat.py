@@ -53,6 +53,7 @@ with yaspin(text="Waking agent...") as spinner:
 
     from modules.Yolo import Eyes
     from modules.google import GoogleManager
+    from modules.github import create_repository
 
     import argparse
     parser = argparse.ArgumentParser()
@@ -61,7 +62,7 @@ with yaspin(text="Waking agent...") as spinner:
     parser.add_argument("-l", "--listen", action="store_true", help = "Make GPT listen")
     parser.add_argument("-t", "--text", action="store_true", help = "Text to GPT")
 
-    cdet = CommandDetector(model_path = "./models/cd_CKPT_IV")
+    cdet = CommandDetector(model_path = "./models/cd_CKPT_V")
     google = GoogleManager()
     eyes = Eyes()
 
@@ -124,11 +125,17 @@ class GPTAssistant():
                         search = google.search()
 
                         self.build_context(role ='system', content = f'The google module found {search}. Respond to the last user promt using this information.')
-        
+
+                    if command == "github":
+                        
+                        repo = create_repository()
+
+                        self.build_context(role ='system', content = f'The github module tried to create a repository and exited:\n {repo}. Tell the user what happened.')
 
                     self.send_to_GPT(messages = self.context)
 
             else:
+                
                 self.send_to_GPT(messages = self.context)
 
                 break
